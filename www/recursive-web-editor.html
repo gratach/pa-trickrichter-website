@@ -1,0 +1,106 @@
+<html><head/><body/><script>
+a=[`<html><head/><body/><script>
+a=[`,`
+
+// This is a html file that contains a code editor that can edit itself
+// It contains a script tag that defines an array a that consists of a list of strings
+// The first string is the upper part of the html file up to the beginning of the array definition
+// The last string is the lower part of the html file after the end of the array definition
+// The second string which also contains this documentation is the code that is executed to create the editor
+
+
+// In order to recreate the whole html file from the array a, it is necessary to undo the escaping of the special characters that happens when the strings in the array are created
+
+function undoEscape(str){
+    // A single backslash is replaced by two backslashes
+    // It is necessary to double the number of written backslashes once for the interpretation of the string and once for the interpretation of the replaceAll function
+    str = str.replaceAll('\\\\', '\\\\\\\\')
+    // The backtick is replaced by a backslash followed by a backtick
+    str = str.replaceAll('\`', '\\\\\`')
+    // The dollar sign is replaced by a backslash followed by a dollar sign
+    str = str.replaceAll('\$', '\\\\\$')
+    // It is forbidden to use the closing script tag within the array definition because it would end the script tag that contains the array definition
+    // Therefore the slash in the closing script tag is replaced by a backslash followed by a slash
+    str = str.replaceAll('<' + '/script>', '<\\\\/script>')
+    return str
+}
+
+function createFileFromArray(arr){
+    // The first element of the array is the upper part of the html file up to the beginning of the array definition
+    // The second element of the array is the lower part of the html file after the end of the array definition
+    // The third element of the array is the code that is executed to create the editor
+    return arr[0] + '\`' + [...function*(){for(x of arr)yield undoEscape(x)}()].join('\`,\`') + '\`' + arr[2]
+}
+
+
+// In order to recreate the array a from the html file, it is necessary to redo the escaping of the special characters
+
+redoEscape = (str) => str.replaceAll('<\\\\/script>', '<' + '/script>').replaceAll('\\\\\$', '\$').replaceAll('\\\\\`', '\`').replaceAll('\\\\\\\\', '\\\\')
+
+function createArrayFromFile(str){
+    // The array is split at the backticks
+    let r = str.split('\`,\`')
+    // The the beginning and end of the html file are removed from the array
+    r[0] = r[0].split('\`').slice(1).join("")
+    r[r.length - 1] = r[r.length - 1].split('\`').slice(0, -1).join("")
+    // The special characters are unescaped
+    return [...function*(){for(x of r)yield redoEscape(x)}()]
+}
+
+drucke = (arr)=>arr[0]+'\`'+[...function*(){for(x of arr)yield x.replaceAll('\\\\','\\\\\\\\').replaceAll('\`','\\\\\`').replaceAll('<\/','<\\\\/')}()].join('\`,\`')+'\`'+arr[2]
+
+
+// The graphical user interface is created by creating html elements and appending them to the document
+
+createHtmlElement = (name, parent, properties = {})=>{
+	let element = document.createElement(name)
+	for(let x in properties) if(properties.hasOwnProperty(x)) element[x] = properties[x]
+	parent.appendChild(element)
+	return element
+}
+
+// Make sure that the elements are arranged as boxes with the size that is specified in the style attribute
+createHtmlElement("style", document.head, {})
+var style = document.styleSheets[0]
+style.insertRule("*{box-sizing: border-box; margin:0;border:0;padding:0;background-color:#ff00ff;float:left}")
+style.insertRule("html,body{float:none}")
+
+// The left side of the screen contains the editor and the option bar
+leftSide = createHtmlElement("div", document.body, {style : "width:50%;height:100%"})
+
+// The right side of the screen contains the nested page
+nestedPage = createHtmlElement("iframe", document.body, {style : "width:50%;height:100%;background-color:#ff0000"})
+
+// The option bar contains a button that shows the nested page
+optionBar = createHtmlElement("div", leftSide, {style : "width:100%;height:10%;background-color:#ffff00"})
+
+// The editor contains a text area that contains the code
+pageCode = createHtmlElement("textarea", leftSide, {style : "width:100%;height:90%;border-width:20px;font-size:2vmin;border-style: solid;border-color:C1E0F0;float:left;", wrap:"off", value : createFileFromArray(a)})
+
+// The button 'show page' runs the code in the editor and shows the result in the nested page iframe
+function showNestedPage(){
+	document.body.removeChild(nestedPage)
+	nestedPage = createHtmlElement("iframe", document.body, {style : "width:50%;height:100%;;background-color:#ff0000"})
+	nestedPage.contentWindow.document.write(pageCode.value)
+}
+showPageButton = createHtmlElement("button", optionBar, {style : "width:25%;height:100%;background-color:#33ff22;font-size:1vw;", onclick : showNestedPage})
+showPageButton.textContent = "Show Page"
+
+// The button 'download file' downloads the code in the editor as a file
+
+downloadElement = createHtmlElement("a", optionBar, {style : "display:none"})
+function downloadFile(){
+    let fileName = prompt("Enter the file name")
+    fileName = fileName.slice(-5) == ".html" ? fileName : fileName + ".html"
+    downloadElement.download = fileName
+    downloadElement.href = URL.createObjectURL(new Blob([createFileFromArray(a)]))
+    downloadElement.click()
+}
+downloadButton = createHtmlElement("button", optionBar, {style : "width:25%;height:100%;background-color:#5533ee;font-size:1vw;", onclick : downloadFile})
+downloadButton.innerHTML = "Download File"
+
+`,`]
+eval(a[1])
+<\/script></html>`]
+eval(a[1])
+</script></html>

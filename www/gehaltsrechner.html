@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gehaltsrechner</title>
+</head>
+<body>
+    <label for="jahresgehalt">Jahresgehalt:</label>
+    <input type="number" value="50000" id="jahresgehalt" name="jahresgehalt" oninput="berechnen(1)"><br><br>
+    
+    <label for="monatsgehalt">Monatsgehalt:</label>
+    <input type="number" id="monatsgehalt" name="monatsgehalt" oninput="berechnen(2)"><br><br>
+
+    <label for="wochenstunden">Wochenstunden:</label>
+    <input type="number" value="32" id="wochenstunden" name="wochenstunden" oninput="berechnen(3)"><br><br>
+    
+    <label for="urlaubstage">Urlaubstage:</label>
+    <input type="number" value="30" id="urlaubstage" name="urlaubstage" oninput="berechnen(4)"><br><br>
+    
+    <label for="weihnachtsgeld">Weihnachtsgeld:</label>
+    <input type="number" value="0" id="weihnachtsgeld" name="weihnachtsgeld" oninput="berechnen(5)"><br><br>
+    
+    <label for="stundenlohn">Stundenlohn:</label>
+    <input type="number" id="stundenlohn" name="stundenlohn" oninput="berechnen(6)"><br><br>
+
+    <button onclick="hinzufuegen()">Merken</button><br><br>
+
+    <label for="zusammenfassung">Zusammenfassung:</label>
+    <textarea id="zusammenfassung" name="summary" rows="10" cols="50"></textarea>
+</body>
+<script>
+    document.getElementById("jahresgehalt").value = 50000;
+    document.getElementById("monatsgehalt").value = 50000 / 12;
+    document.getElementById("wochenstunden").value = 32;
+    document.getElementById("urlaubstage").value = 30;
+    document.getElementById("weihnachtsgeld").value = 0;
+
+    var jahr_or_monat_fixed = "jahr";
+    function berechnen(element){
+        let jahresgehalt = Number(document.getElementById("jahresgehalt").value);
+        let monatsgehalt = Number(document.getElementById("monatsgehalt").value);
+        console.log(jahresgehalt, monatsgehalt);
+        if (element == 2){
+            jahresgehalt = monatsgehalt * 12;
+            document.getElementById("jahresgehalt").value = jahresgehalt;
+        }
+        else{
+            monatsgehalt = jahresgehalt / 12;
+            document.getElementById("monatsgehalt").value = monatsgehalt;
+        }
+        let feiertageHamburg = 10;
+        console.log("Feiertage in Hamburg: ", feiertageHamburg);
+        let tageImJahr = 365;
+        console.log("Tage im Jahr: ", tageImJahr);
+        let wochenImJahr = tageImJahr / 7;
+        console.log("Wochen im Jahr: ", wochenImJahr);
+        let urlaubstage = Number(document.getElementById("urlaubstage").value);
+        console.log("Urlaubstage: ", urlaubstage);
+        let arbeitstage = tageImJahr - feiertageHamburg - urlaubstage;
+        console.log("Arbeitstage: ", arbeitstage);
+        let prozentArbeitstage = arbeitstage / tageImJahr;
+        console.log("Prozent Arbeitstage: ", prozentArbeitstage);
+        let arbeitswochenImJahr = wochenImJahr * prozentArbeitstage;
+        console.log("Arbeitswochen im Jahr: ", arbeitswochenImJahr);
+        let wochenstunden = Number(document.getElementById("wochenstunden").value);
+        console.log("Wochenstunden: ", wochenstunden);
+        let arbeitsstundenImJahr = wochenstunden * arbeitswochenImJahr;
+        console.log("Arbeitsstunden im Jahr: ", arbeitsstundenImJahr);
+
+        let weihnachtsgeld = Number(document.getElementById("weihnachtsgeld").value);
+        console.log("Weihnachtsgeld: ", weihnachtsgeld);
+        let gehaltProJahr = jahresgehalt + weihnachtsgeld;
+        console.log("Gehalt pro Jahr: ", gehaltProJahr);
+        
+        let stundenlohn = gehaltProJahr / arbeitsstundenImJahr;
+        document.getElementById("stundenlohn").value = stundenlohn;
+
+        
+    }
+    function hinzufuegen(){
+        document.getElementById("zusammenfassung").value += "Jahr: " + document.getElementById("jahresgehalt").value + ", Monat: " + document.getElementById("monatsgehalt").value + ", Wochenstunden: " + document.getElementById("wochenstunden").value + ", Urlaubstage: " + document.getElementById("urlaubstage").value + ", Weihnachtsgeld: " + document.getElementById("weihnachtsgeld").value + ", Stundenlohn: " + document.getElementById("stundenlohn").value + "\n\n"; 
+    }
+    berechnen(1);
+</script>
+</html>
