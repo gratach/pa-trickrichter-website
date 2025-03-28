@@ -3,23 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Under Construction</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-        }
-        h1 {
-            color: #333;
-        }
-    </style>
+    <title>Patrick Richter - Personal Website</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <h1>This website is under construction</h1>
+    <header>
+        <a href="de/index.html" class="language-switcher">
+            <i class="fas fa-globe"></i> Deutsch
+        </a>
+        
+        <div class="profile-container">
+            <img src="images/me.png" alt="Patrick Richter" class="profile-image">
+            <div class="header-content">
+                <h1>Patrick Richter</h1>
+                <p>Personal Website</p>
+            </div>
+        </div>
+    </header>
+
+    <section class="introduction">
+        <h2>My Motivation</h2>
+        <div class="introduction-content">
+            <p>Hello, my name is Patrick, I live in Hamburg and would like to use my time on this earth to make the greatest positive impact possible. So I've spent a long time thinking about what contribution I, as an individual, can best make to achieve this goal, and I want to share my thoughts on this topic here:</p>
+            
+            <p>First of all, it might be helpful to articulate exactly what I would wish for in a better world. For example, I like it when individuals work together to achieve common goals. Sometimes I feel that there is too much competitive thinking in society and that people prioritize their own interests or the interests of their group or nationality too much. It is also important to me that each individual has the opportunity to help shape this world. Sometimes it seems to me as if many people have resigned themselves to the idea that they have almost no influence on what happens around them and are confronted with predetermined outcomes.</p>
+            
+            <p>So what could concretely be done to change these things? My gut feeling tells me that there could be much more constructive collaboration and active social participation if we use tools that are designed to promote community cooperation in the best possible way, and if we create structures that encourage people to participate in them. Here are my suggestions for what such tools and structures might look like in practice:</p>
+            
+            <p>A tool I have long wished for is an online forum optimized for solution-oriented discussions and community organization to realize projects for the common good. I have the impression that most common online forums do not set this focus and instead use their algorithms to maximize their own profit. Features that I believe a common good-oriented online forum should have include categorization and structuring of all posts into a coherent network of questions, statements, topics, goals, and plans. Content-identical posts within the forum should be mergeable, and similar comments should be grouped. The contents of the forum should be available under the Creative Commons license and downloadable in an open format. The forum itself should be decentralized if possible and published as open source software including all algorithms used.</p>
+            
+            <p>A social structure I would like to participate in is a non-profit organization that financially supports common good-oriented projects. I would find it good if this organization makes its decisions in a grassroots democratic way and every person who wants to participate in the vote has a vote. Such a non-profit organization could also organize the development and operation of the online forum described above.</p>
+            
+            <p>Because these two projects, in my estimation, have the potential to enrich this world, my personal answer to the question of how I as an individual can make a positive contribution is currently that I want to advocate for them. Of course, I realize that this is not something I can achieve alone. So if you want to work with me to achieve this goal, please contact me at patrick-richter@posteo.de.</p>
+        </div>
+        <button class="expand-button" data-expand-text="Read More" data-collapse-text="Read Less" aria-expanded="false">Read More</button>
+    </section>
+
+    <section class="projects-section">
+        <h2>My Projects</h2>
+        <div class="projects-container">
+            <!-- Project 1 -->
+            <div class="project-card">
+                <div class="project-content">
+                    <h3 class="project-title">Applications of Semantic Networks to Fundamental Physics</h3>
+                    <p class="project-description">In this master's thesis, I investigated how physical content can be represented as semantic networks and how such networks can be generated with the help of modern AI tools.</p>
+                    <div class="project-links">
+                        <a href="masterarbeit.pdf" class="project-link">Master's thesis PDF</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card">
+                <div class="project-content">
+                    <h3 class="project-title">Development of an interactive program for simulating and visualizing quantum mechanical wave functions.</h3>
+                    <p class="project-description">As part of my bachelor thesis, I programmed an interactive web application using JavaScript, C, and WebAssembly, with which particle waves can be simulated in a freely configurable, time-dependent potential.</p>
+                    <div class="project-links">
+                        <a href="bachelorarbeit.pdf" class="project-link">Bachelor's thesis PDF</a>
+                        <a href="https://quantsimulant.de" target="_blank" class="project-link">Website</a>
+                        <a href="https://github.com/gratach/quantsimulant" target="_blank" class="project-link">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card">
+                <div class="project-content">
+                    <h3 class="project-title">Cokurs – Programming website for children</h3>
+                    <p class="project-description">I developed a website for the Computer AG of the Margaretha-Rothe-Gymnasium, featuring an integrated text editor for editing and executing JavaScript code.</p>
+                    <div class="project-links">
+                        <a href="https://cokurs.de" target="_blank" class="project-link">Website</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-card">
+                <div class="project-content">
+                    <h3 class="project-title">Debablo – Draft concept for a discussion platform based on semantic networks</h3>
+                    <p class="project-description">In a joint project with fellow students, I created a draft concept for a discussion platform based on semantic networks and programmed a demo.</p>
+                    <div class="project-links">
+                        <a href="https://debablo.de/planung/forum_konzeptentwurf.pdf" target="_blank" class="project-link">Draft concept</a>
+                        <a href="https://debablo.de" target="_blank" class="project-link">Website</a>
+                        <a href="https://github.com/gratach/navigating-blobs" target="_blank" class="project-link">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="project-card">
+                <div class="project-content">
+                    <h3 class="project-title">Linchat - Linear online chat</h3>
+                    <p class="project-description">Using Python, JavaScript, and WebSockets, I programmed a web application that can be used to conduct linear chat conversations.</p>
+                    <div class="project-links">
+                        <a href="https://linchat.trickrichter.de" target="_blank" class="project-link">Website</a>
+                        <a href="https://github.com/gratach/linchat" target="_blank" class="project-link">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Template for adding new projects -->
+            <!-- 
+            <div class="project-card">
+                <div class="project-content">
+                    <h3 class="project-title">Project Title</h3>
+                    <p class="project-description">Project description goes here.</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link">Link 1</a>
+                        <a href="#" class="project-link">Link 2</a>
+                    </div>
+                </div>
+            </div>
+            -->
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Patrick Richter. Contact: patrick-richter@posteo.de</p>
+    </footer>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
